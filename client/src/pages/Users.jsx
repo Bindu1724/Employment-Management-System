@@ -4,7 +4,11 @@ import { useAuth } from '../store/auth';
 
 export default function Users() {
   const { user } = useAuth();
-  const { data, error } = useQuery(['users'], async () => (await http.get('/users')).data, { enabled: user?.role === 'admin' });
+  const { data, error } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => (await http.get('/users')).data,
+    enabled: user?.role === 'admin'
+  });
 
   if (user?.role !== 'admin') return <div className="alert alert-warning">Forbidden: Admins only</div>;
   if (error) return <div className="alert alert-danger">Error loading users</div>;

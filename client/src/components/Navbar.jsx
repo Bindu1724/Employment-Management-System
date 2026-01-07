@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/auth';
 
 export default function Navbar() {
@@ -19,10 +19,10 @@ export default function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="nav">
           <ul className="navbar-nav me-auto">
-            <li className="nav-item"><Link className="nav-link" to="/">Dashboard</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/employees">Employees</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/departments">Departments</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/users">Users</Link></li>
+            <li className="nav-item"><NavLink className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')} to="/dashboard">Dashboard</NavLink></li>
+            <li className="nav-item"><NavLink className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')} to="/employees">Employees</NavLink></li>
+            <li className="nav-item"><NavLink className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')} to="/departments">Departments</NavLink></li>
+            <li className="nav-item"><NavLink className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')} to="/users">Users</NavLink></li>
           </ul>
           <span className="navbar-text me-3">{user ? `${user.name} (${user.role})` : ''}</span>
           <button className="btn btn-outline-light" onClick={handleLogout}>Logout</button>
