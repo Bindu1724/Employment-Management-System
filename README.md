@@ -45,7 +45,7 @@ cd Employment-Management-System
 ```powershell
 cd server
 npm install
-# create a .env file (see below)
+
 ```
 
 ### Client setup
