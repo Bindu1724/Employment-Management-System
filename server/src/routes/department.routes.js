@@ -25,7 +25,7 @@ router.put('/:id', auth, permit('admin'), async (req, res) => {
   }
 });
 
-router.delete('/:id', auth, permit('admin'), async (req, res) => {
+router.delete('/:id', auth, permit('admin', 'manager'), async (req, res) => {
   try {
     await Department.findByIdAndDelete(req.params.id);
     res.status(204).end();

@@ -20,8 +20,14 @@ export default function Departments() {
     }
   });
 
+  const del = useMutation({
+    mutationFn: async (id) => (await http.delete(`/departments/${id}`)).data,
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['departments'] }),
+  });
+
   // Helper to render API error messages in UI
   const createErrorMessage = create.error?.response?.data?.message || create.error?.message || null;
+  const deleteErrorMessage = del.error?.response?.data?.message || del.error?.message || null; 
 
   return (
     <>
@@ -46,12 +52,27 @@ export default function Departments() {
             {fetchError && <div className="text-danger small mb-2">{fetchErrorObj?.response?.data?.message || fetchErrorObj?.message || 'Error loading departments. Are you signed in?'}</div>}
             <ul className="list-group">
               {data?.map(d => (
-                <li key={d._id} className="list-group-item d-flex justify-content-between">
+                <li key={d._id} className="list-group-item d-flex justify-content-between align-items-center">
                   <div>
                     <strong>{d.name}</strong> ({d.code})
                   </div>
+                  <div>
+                    {(token && ['admin','manager'].includes(user?.role)) ? (
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={() => {
+                          if (!window.confirm(`Delete department "${d.name}"? This cannot be undone.`)) return;
+                          del.mutate(d._id);
+                        }}
+                        disabled={del.isLoading}
+                      >
+                        {del.isLoading ? 'Deleting...' : 'Delete'}
+                      </button>
+                    ) : null}
+                  </div>
                 </li>
               ))}
+              {del.isError && <div className="text-danger small mt-2">{deleteErrorMessage || 'Failed to delete department'}</div>}
             </ul>
           </div>
         </div>
