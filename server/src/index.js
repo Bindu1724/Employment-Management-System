@@ -14,7 +14,7 @@ const empRoutes = require('./routes/employee.routes');
 
 const app = express();
 app.use(helmet());
-app.use(cors({ origin: 'https://emanagesystem.netlify.app/', credentials: true }));
+app.use(cors({ origin: 'https://emanagesystem.netlify.app', credentials: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
