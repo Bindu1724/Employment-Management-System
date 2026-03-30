@@ -4,6 +4,11 @@ A simple full-stack Employment Management System (EMS) built with Node.js/Expres
 
 ---
 
+# 🚀 Live Demo
+- Frontend (Netlify):https://startling-cuchufli-78f449.netlify.app
+- Backend (Render): https://employment-management-system-j1cs.onrender.com
+- API Base URL: https://employment-management-system-j1cs.onrender.com/api
+
 ## Features
 
 - User registration and login (JWT)
