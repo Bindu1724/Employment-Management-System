@@ -21,9 +21,7 @@ export default function AppRoutes() {
         <Route
           path="/register"
           element={
-            <PrivateRoute>
               <Layout><Register /></Layout>
-            </PrivateRoute>
           }
         />
         <Route 
